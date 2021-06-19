@@ -154,10 +154,10 @@ enum keycodes {
 /* The keymap for the Commodore 64 keyboard with Danish keys mapping
    to a PC with danish keyboard mapping */
 const unsigned char keymap[NUMROWS][8] PROGMEM = { // German keymap (C64)
-    {SPC_del, 		KEY_3, 		KEY_5, 		KEY_7, 		KEY_9, 		KEY_equal, 		KEY_pgdn, 		KEY_1}, 		   // row0
+    {SPC_del, 		KEY_3, 		KEY_5, 		KEY_7, 		KEY_9, 		KEY_minus, 		KEY_pgdn, 		KEY_1}, 		   // row0
     {KEY_enter, 	KEY_W, 		KEY_R, 		KEY_Y, 		KEY_I, 		KEY_P, 			KEY_rbr, 	   SPC_CLR},		// row1
     {SPC_crsrlr, 	KEY_A, 		KEY_D, 		KEY_G, 		KEY_J, 		KEY_L, 			KEY_ping, 		MOD_LCTRL}, 	// row2
-    {SPC_HELP, 	KEY_4, 		KEY_6, 		KEY_8, 		KEY_0, 		KEY_minus,     KEY_pgup, 		KEY_2}, 		   // row3
+    {SPC_HELP, 	KEY_4, 		KEY_6, 		KEY_8, 		KEY_0, 		KEY_equal,     KEY_pgup, 		KEY_2}, 		   // row3
     {SPC_F1, 		KEY_Z, 		KEY_C, 		KEY_B, 		KEY_M, 		KEY_dot, 		MOD_RSHIFT, 	KEY_spc}, 		// row4
     {SPC_F2, 		KEY_S, 		KEY_F, 		KEY_H, 		KEY_K, 		KEY_smcol, 		KEY_bckslsh, 	MOD_LGUI}, 		// row5
     {SPC_F3, 		KEY_E, 		KEY_T, 		KEY_U, 		KEY_O, 		KEY_lbr, 	   KEY_grave,     KEY_Q}, 		   // row6
