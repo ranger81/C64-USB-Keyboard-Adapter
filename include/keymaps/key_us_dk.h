@@ -15,6 +15,8 @@
 #define KEYMAP_H
 #include <avr/pgmspace.h>
 
+#define C64
+
 /* Number of rows in keyboard matrix */
 #define NUMROWS 9
 
@@ -192,7 +194,7 @@ const unsigned char spec_keys[22][4] PROGMEM = {
   { KEY_0,       0x00, KEY_0,       0x88}, // SPEC_0
   { KEY_minus,   0x88, KEY_minus,   0x88}, // SPC_plus 
   { KEY_slash,   0x88, KEY_slash,   0x88}, // SPC_minus - "-" and "="
-  { KEY_3,       0xC8, KEY_3,       0xC8}, // SPC_pound - £
+  { KEY_3,       0xC8, KEY_3,       0xC8}, // SPC_pound - ï¿½
   { KEY_home,    0x80, KEY_end,     0x80}, // SPC_home - home and end
   { KEY_bckspc,  0x00, KEY_del,     0x88}, // SPC_del - backspace and delete
   { KEY_bckslsh, 0x82, KEY_bckslsh, 0x8A}, // SPC_ast - "*" (Asterix)

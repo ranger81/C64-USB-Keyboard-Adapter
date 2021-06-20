@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "key_us_us.h": "c"
+        "key_us_us.h": "c",
+        "key_c16_us_de.h": "c",
+        "key_c64_us_de.h": "c"
     }
 }

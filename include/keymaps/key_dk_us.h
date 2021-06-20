@@ -15,6 +15,8 @@
 #define KEYMAP_H
 #include <avr/pgmspace.h>
 
+#define C64
+
 /* Number of rows in keyboard matrix */
 #define NUMROWS 9
 
@@ -207,7 +209,7 @@ const unsigned char spec_keys[22][4] PROGMEM = {
   { KEY_F5,      0x80, KEY_F6,      0x80}, // SPC_F5 - F5 and F6
   { KEY_F7,      0x80, KEY_F8,      0x80}, // SPC_F7 - F7 and F8
   { KEY_6,       0x02, KEY_6,       0x00}, // SPC_hat - "^"
-  { KEY_A,       0x00, KEY_A,       0x00}, // SPC_colon - "æ" and "Æ"
-  { KEY_O,       0x00, KEY_O,       0x00}, // SPC_smcol - "ø" and "Ø"
+  { KEY_A,       0x00, KEY_A,       0x00}, // SPC_colon - "ï¿½" and "ï¿½"
+  { KEY_O,       0x00, KEY_O,       0x00}, // SPC_smcol - "ï¿½" and "ï¿½"
 };
 #endif

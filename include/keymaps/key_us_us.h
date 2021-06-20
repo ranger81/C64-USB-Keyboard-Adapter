@@ -15,6 +15,8 @@
 #define KEYMAP_H
 #include <avr/pgmspace.h>
 
+#define C64
+
 /* Number of rows in keyboard matrix */
 #define NUMROWS 9
 
