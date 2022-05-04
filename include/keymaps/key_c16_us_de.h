@@ -162,7 +162,7 @@ const unsigned char keymap[NUMROWS][8] PROGMEM = { // German keymap (C16 w/ adap
     {SPC_F2, 		KEY_S, 		KEY_F, 		KEY_H, 		KEY_K, 		KEY_smcol, 		SPC_crsrlr, 	MOD_LGUI}, 		// row5
     {SPC_F3, 		KEY_E, 		KEY_T, 		KEY_U, 		KEY_O, 		MOD_RSHIFT, 	KEY_rbr, 		KEY_Q}, 		// row6
     {KEY_lbr, 		MOD_LSHIFT, KEY_X, 		KEY_V, 		KEY_N, 		KEY_comma, 		KEY_slash, 		MOD_RALT}, 		// row7
-    {KEY_3/*x*/, 0, 0, 0, 0, 0, 0, 0} // Imaginary row8 is for restore
+    {0, 0, 0, KEY_3/*x*/, 0, 0, 0, 0} // Imaginary row8 is for restore
   };
 
 /* Special keys that need to generate different scan-codes for unshifted

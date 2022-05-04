@@ -298,8 +298,13 @@ sendRemoteWakeUp();
             if (key>KEY_Special) { /* Special handling of shifted keys */
               /* Modifiers have not been decoded yet - handle manually */
               uchar keynum=key-(KEY_Special+1);
+              #ifdef PLUS4
+              if (((bitbuf[4]&0b01000000) || (key >=SPC_grave))&& /* Rshift */
+                   ((bitbuf[7]&0b00000010))) {/* Lshift */ // war ((bitbuf[7]&0b00000010)||(key>=SPC_crsrud))) aus irgendeinem Grund....
+              #else
               if ((bitbuf[4]&0b01000000)&& /* Rshift */
                    ((bitbuf[7]&0b00000010))) {/* Lshift */ // war ((bitbuf[7]&0b00000010)||(key>=SPC_crsrud))) aus irgendeinem Grund....
+              #endif
                 key=pgm_read_byte(&spec_keys[keynum][0]); /* Unmodified */
                 modkeys=pgm_read_byte(&spec_keys[keynum][1]);
               } else {

@@ -15,7 +15,7 @@
 #define KEYMAP_H
 #include <avr/pgmspace.h>
 
-#define C64
+#define PLUS4
 
 /* Number of rows in keyboard matrix */
 #define NUMROWS 9
@@ -143,43 +143,34 @@ enum keycodes {
      and some may need to alter the shift-state to generate the
      correct character code on the PC */
   KEY_Special,
-  SPC_2,
-  SPC_6,
-  SPC_7,
-  SPC_8,
-  SPC_9,
-  SPC_0,
-  SPC_plus,
-  SPC_minus,
-  SPC_pound,
-  SPC_home,
   SPC_del,
-  SPC_ast,
-  SPC_equal,
-  SPC_crsrud,
-  SPC_crsrlr,
-  SPC_F1,
-  SPC_F3,
-  SPC_F5,
-  SPC_F7,
-  SPC_hat,
-  SPC_colon,
-  SPC_smcol,
-  SPC_at
+  SPC_F1F5,
+  SPC_F2F6,
+  SPC_F3F7,
+  SPC_F4F8,
+  SPC_2,
+  SPC_3,
+  SPC_quote,
+  SPC_pipe,
+  SPC_up,
+  SPC_down,
+  SPC_left,
+  SPC_right,
+  SPC_grave
 };
 
 /* The keymap for the Commodore 64 keyboard with Danish keys mapping
    to a PC with danish keyboard mapping */
 const unsigned char keymap[NUMROWS][8] PROGMEM = { // Danish keymap
-    {SPC_del, KEY_3, KEY_5, SPC_7, SPC_9, SPC_plus, SPC_pound, KEY_1}, // row0
-    {KEY_enter, KEY_W, KEY_R, KEY_Y, KEY_I, KEY_P, SPC_ast, KEY_esc}, // row1
-    {SPC_crsrlr, KEY_A, KEY_D, KEY_G, KEY_J, KEY_L, SPC_smcol, MOD_LCTRL}, // row2
-    {SPC_F7, KEY_4, SPC_6, SPC_8, SPC_0, SPC_minus, SPC_home, SPC_2}, // row3
-    {SPC_F1, KEY_Z, KEY_C, KEY_B, KEY_M, KEY_dot, MOD_RSHIFT, KEY_spc}, // row4
-    {SPC_F3, KEY_S, KEY_F, KEY_H, KEY_K, SPC_colon, SPC_equal, MOD_LALT}, // row5
-    {SPC_F5, KEY_E, KEY_T, KEY_U, KEY_O, SPC_at, SPC_hat, KEY_Q}, // row6
-    {SPC_crsrud, MOD_LSHIFT, KEY_X, KEY_V, KEY_N, KEY_comma, KEY_slash, MOD_RALT}, // row7
-    {0, 0, 0, MOD_RCTRL, 0, 0, 0, 0} // Imaginary row8 is for restore
+    {KEY_F11,     SPC_3,      KEY_5,      KEY_7,      KEY_9,      SPC_down,   SPC_left,   KEY_1}, // row0
+    {KEY_enter,   KEY_W,      KEY_R,      KEY_Y,      KEY_I,      KEY_P,      SPC_pipe,   KEY_F10}, // row1
+    {KEY_rbr,     KEY_A,      KEY_D,      KEY_G,      KEY_J,      KEY_L,      SPC_quote,  SPC_del}, // row2
+    {SPC_F4F8,    KEY_4,      KEY_6,      KEY_8,      KEY_0,      SPC_up,     SPC_right,  SPC_2}, // row3
+    {SPC_F1F5,    KEY_Z,      KEY_C,      KEY_B,      KEY_M,      KEY_dot,    SPC_grave,  KEY_spc}, // row4
+    {SPC_F2F6,    KEY_S,      KEY_F,      KEY_H,      KEY_K,      KEY_smcol,  KEY_F9,     MOD_LCTRL}, // row5
+    {SPC_F3F7,    KEY_E,      KEY_T,      KEY_U,      KEY_O,      KEY_equal,  KEY_minus,  KEY_Q}, // row6
+    {KEY_lbr,     MOD_LSHIFT, KEY_X,      KEY_V,      KEY_N,      KEY_comma,  KEY_slash,  KEY_cpslck}, // row7
+    {0,           0,          0,          0,          0,          0,          0,          0} // Imaginary row8 is for restore
   };
 
 /* Special keys that need to generate different scan-codes for unshifted
@@ -189,29 +180,20 @@ const unsigned char keymap[NUMROWS][8] PROGMEM = { // Danish keymap
      0x88 means clear both shift flags
      0x00 means do not alter shift states
      0xC8 means clear both shifts and set L_ALT */
-const unsigned char spec_keys[23][4] PROGMEM = {
-  { KEY_2,       0x00, KEY_ping,    0x00}, // SPC_2 - shift-2 is "
-  { KEY_6,       0x00, KEY_7,       0x00}, // SPC_6 - shift-6 is &
-  { KEY_7,       0x00, KEY_ping,    0x88}, // SPC_7 - shift-7 is '
-  { KEY_8,       0x00, KEY_9,       0x00}, // SPC_8 - shift-8 is (
-  { KEY_9,       0x00, KEY_0,       0x00}, // SPC_9 - shift-9 is )
-  { KEY_0,       0x00, KEY_0,       0x88}, // SPC_0 - shift-0 is 0
-  { KEY_equal,   0x02, KEY_equal,   0x8A}, // SPC_plus 
-  { KEY_minus,   0x00, KEY_minus,   0x88}, // SPC_minus - "-" and "-"
-  { KEY_grave,   0x02, KEY_grave,   0x8A}, // SPC_pound - "~"
-  { KEY_home,    0x80, KEY_end,     0x80}, // SPC_home - home and end
+const unsigned char spec_keys[14][4] PROGMEM = {
   { KEY_bckspc,  0x00, KEY_del,     0x88}, // SPC_del - backspace and delete
-  { KEY_8,       0x02, KEY_8,       0x02}, // SPC_ast - "*" (Asterix)
-  { KEY_equal,   0x00, KEY_equal,   0x88}, // SPC_equal - "="
-  { KEY_darr,    0x80, KEY_uarr,    0x80}, // SPC_crsrud - cursor down/up
-  { KEY_rarr,    0x80, KEY_larr,    0x80}, // SPC_crsrlr - cursor right/left
-  { KEY_F1,      0x80, KEY_F2,      0x80}, // SPC_F1 - F1 and F2
-  { KEY_F3,      0x80, KEY_F4,      0x80}, // SPC_F3 - F3 and F4
-  { KEY_F5,      0x80, KEY_F6,      0x80}, // SPC_F5 - F5 and F6
-  { KEY_F7,      0x80, KEY_F8,      0x80}, // SPC_F7 - F7 and F8
-  { KEY_6,       0x02, KEY_6,       0x00}, // SPC_hat - "^"
-  { KEY_smcol,   0x02, KEY_lbr,     0x88}, // SPC_colon - : and [
-  { KEY_smcol,   0x00, KEY_rbr,     0x88}, // SPC_smcol - ; and ]
-  { KEY_2,       0x8A, KEY_2,       0x8A}, // SPC_at - @
+  { KEY_F1,      0x80, KEY_F5,      0x80}, // SPC_F1F5 - F1 and F5
+  { KEY_F2,      0x80, KEY_F6,      0x80}, // SPC_F2F6 - F2 and F6
+  { KEY_F3,      0x80, KEY_F7,      0x80}, // SPC_F3F7 - F3 and F7
+  { KEY_F4,      0x80, KEY_F8,      0x80}, // SPC_F4F8 - F4 and F8
+  { KEY_2,       0x00, KEY_ping,    0x00}, // SPC_2 - 2 and @
+  { KEY_3,       0x00, KEY_hash,    0x88}, // SPC_3 - shift-3 is #
+  { KEY_ping,    0x00, KEY_2,       0x00}, // SPC_quote - shift-' is "
+  { KEY_Euro2,   0x00, KEY_Euro2,   0x80}, // SPC_pipe - shift-\ is |
+  { KEY_uarr,    0x00, KEY_pgup,    0x88}, // SPC_up - shift-up is pgup
+  { KEY_darr,    0x00, KEY_pgdn,    0x88}, // SPC_down - shift-down is pgdn
+  { KEY_larr,    0x00, KEY_home,    0x88}, // SPC_left - shift-left is home
+  { KEY_rarr,    0x00, KEY_end,     0x88}, // SPC_right - shift-right is end
+  { KEY_grave,   0x00, KEY_hash,    0x00}, // SPC_grave - shift-` is ~
 };
 #endif

@@ -178,7 +178,7 @@ const unsigned char keymap[NUMROWS][8] PROGMEM = { // Danish keymap
     {SPC_F3, KEY_S, KEY_F, KEY_H, KEY_K, SPC_colon, SPC_equal, MOD_LALT}, // row5
     {SPC_F5, KEY_E, KEY_T, KEY_U, KEY_O, KEY_A, SPC_hat, KEY_Q}, // row6
     {SPC_crsrud, MOD_LSHIFT, KEY_X, KEY_V, KEY_N, KEY_comma, KEY_slash, MOD_RALT}, // row7
-    {MOD_RCTRL, 0, 0, 0, 0, 0, 0, 0} // Imaginary row8 is for restore
+    {0, 0, 0, MOD_RCTRL, 0, 0, 0, 0} // Imaginary row8 is for restore
   };
 
 /* Special keys that need to generate different scan-codes for unshifted
