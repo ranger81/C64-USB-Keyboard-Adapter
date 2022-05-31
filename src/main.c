@@ -219,7 +219,20 @@ static uchar scankeys(void) {
   for (row=0;row<NUMROWS;++row) { /* Scan all rows */
     DDRD&=~0b00111000; /* all 3 are input */
     PORTD|=0b00111000; /* pull-up enable */
-    #ifdef C64
+    #ifdef PLUS4
+        if (row<6) {
+      data=pgm_read_byte(&modmask[row]);
+      DDRB=data;
+      PORTB=~data;
+    } else { // 3 extra rows are on PORTD
+      DDRB=0;
+      PORTB=0xFF;
+      data=pgm_read_byte(&extrows[row-6]);
+      DDRD|=data;
+      PORTD&=~data;
+    }
+    
+    #else
     if (row<6) {
       data=pgm_read_byte(&modmask[row]);
       DDRB=data;
@@ -234,23 +247,13 @@ static uchar scankeys(void) {
       DDRD&=~0x08;
       PORTD|= 0x08;
     }
-    #else
-    if (row<6) {
-      data=pgm_read_byte(&modmask[row]);
-      DDRB=data;
-      PORTB=~data;
-    } else { // 3 extra rows are on PORTD
-      DDRB=0;
-      PORTB=0xFF;
-      data=pgm_read_byte(&extrows[row-6]);
-      DDRD|=data;
-      PORTD&=~data;
-    }
     #endif
     
     _delay_us(30); /* Used to be small loop, but the compiler optimized it away ;-) */
-  #ifdef C64  
-    if(row<8) {
+  #ifdef PLUS4 
+     data=(PINC&0x3F)|(PIND&0xC0);
+     #else
+         if(row<8) {
       data=(PINC&0x3F)|(PIND&0xC0);
     }
     else {
@@ -262,8 +265,6 @@ static uchar scankeys(void) {
       }
      
     }
-     #else
-     data=(PINC&0x3F)|(PIND&0xC0);
       #endif
     if (data^bitbuf[row]) { 
       debounce=20; /* If a change was detected, activate debounce counter */ // ge�ndert auf 20, damit weniger doppelbuchstaben kommen, von 10 auf 20
@@ -301,6 +302,8 @@ sendRemoteWakeUp();
               #ifdef PLUS4
               if (((bitbuf[4]&0b01000000) || (key >=SPC_grave))&& /* Rshift */
                    ((bitbuf[7]&0b00000010))) {/* Lshift */ // war ((bitbuf[7]&0b00000010)||(key>=SPC_crsrud))) aus irgendeinem Grund....
+              #elif defined(C16)
+                if (bitbuf[7]&0b00000010) {/* Both shifts */
               #else
               if ((bitbuf[4]&0b01000000)&& /* Rshift */
                    ((bitbuf[7]&0b00000010))) {/* Lshift */ // war ((bitbuf[7]&0b00000010)||(key>=SPC_crsrud))) aus irgendeinem Grund....

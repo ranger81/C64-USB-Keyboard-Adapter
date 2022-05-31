@@ -15,6 +15,8 @@
 #define KEYMAP_H
 #include <avr/pgmspace.h>
 
+#define C16
+
 /* Number of rows in keyboard matrix */
 #define NUMROWS 9
 
@@ -155,13 +157,13 @@ enum keycodes {
    to a PC with danish keyboard mapping */
 const unsigned char keymap[NUMROWS][8] PROGMEM = { // German keymap (C16 w/ adapter)
     {SPC_del, 		KEY_3, 		KEY_5, 		KEY_7, 		KEY_9, 		KEY_pgdn, 		KEY_minus, 		KEY_1}, 		// row0
-    {KEY_enter, 	KEY_W, 		KEY_R, 		KEY_Y, 		KEY_I, 		KEY_P, 			KEY_bckslsh, 	SPC_CLR},		// row1
+    {KEY_enter, 	KEY_W, 		KEY_R, 		KEY_Y, 		KEY_I, 		KEY_P, 			KEY_bckslsh, 	MOD_RALT},		// row1
     {SPC_crsrud, 	KEY_A, 		KEY_D, 		KEY_G, 		KEY_J, 		KEY_L, 			KEY_ping, 		MOD_LCTRL}, 	// row2
-    {SPC_HELP, 		KEY_4, 		KEY_6, 		KEY_8, 		KEY_0, 		KEY_pgup, 		KEY_equal, 		KEY_2}, 		// row3
-    {SPC_F1, 		KEY_Z, 		KEY_C, 		KEY_B, 		KEY_M, 		KEY_dot, 		KEY_esc, 	KEY_spc}, 		// row4
+    {SPC_HELP, 	KEY_4, 		KEY_6, 		KEY_8, 		KEY_0, 		KEY_pgup, 		KEY_equal, 		KEY_2}, 		// row3
+    {SPC_F1, 		KEY_Z, 		KEY_C, 		KEY_B, 		KEY_M, 		KEY_dot, 		SPC_CLR, 	   KEY_spc}, 		// row4
     {SPC_F2, 		KEY_S, 		KEY_F, 		KEY_H, 		KEY_K, 		KEY_smcol, 		SPC_crsrlr, 	MOD_LGUI}, 		// row5
-    {SPC_F3, 		KEY_E, 		KEY_T, 		KEY_U, 		KEY_O, 		MOD_RSHIFT, 	KEY_rbr, 		KEY_Q}, 		// row6
-    {KEY_lbr, 		MOD_LSHIFT, KEY_X, 		KEY_V, 		KEY_N, 		KEY_comma, 		KEY_slash, 		MOD_RALT}, 		// row7
+    {SPC_F3, 		KEY_E, 		KEY_T, 		KEY_U, 		KEY_O, 		KEY_Euro2, 	   KEY_rbr, 		KEY_Q}, 		// row6
+    {KEY_lbr, 		MOD_LSHIFT, KEY_X, 		KEY_V, 		KEY_N, 		KEY_comma, 		KEY_slash, 		MOD_LALT}, 		// row7
     {0, 0, 0, KEY_3/*x*/, 0, 0, 0, 0} // Imaginary row8 is for restore
   };
 
